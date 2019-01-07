@@ -2,6 +2,8 @@ version: '3.4'
 services:
   postgis: 
     image: kartoza/postgis:9.6-2.4
+    environment:
+      ALLOW_IP_RANGE: 0.0.0.0/0
     ports:
       - "5432:5432"
 
@@ -10,3 +12,10 @@ services:
     entrypoint: tail -f /dev/null
     volumes:
       - .:/myscripts
+
+  centos6:
+    image: centos:6.10
+    entrypoint: tail -f /dev/null
+    volumes:
+      - .:/myscripts
+
