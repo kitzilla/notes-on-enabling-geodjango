@@ -27,7 +27,15 @@ https://pcjericks.github.io/py-gdalogr-cookbook/
 
     Shellscript for CentOS6 (and potentially Amazon Linux 1) by building GDAL from source
     Allows you to install GDAL in Python but not the latest version.
+5. docker-compose.yml
 
+    docker-compose file for testing
+
+6. testsite (directory)
+
+    A minimal Django 1.18 site to debug the scripts
+    
+    
 
 Author: Go Sato, 2019
 

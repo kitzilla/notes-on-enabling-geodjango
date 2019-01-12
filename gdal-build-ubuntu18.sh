@@ -3,9 +3,9 @@
 # Written 7 Jan 2019
 # Tested on Ubuntu bionic
 
-GEOS_VER=3.7.1   # 3.7.0+ can't be built straight away in CentOS6 due to c++11 requirement
-PROJ_VER=5.2.0   # 5.2.0+ can't be built straight away in CentOS6 due to c++11 requirement
-GDAL_VER=2.4.0   # 2.3.0+ can't be built straight away in CentOS6 due to c++11 requirement
+GEOS_VER=3.7.1
+PROJ_VER=5.2.0
+GDAL_VER=2.4.0
 
 
 cd /tmp
@@ -16,7 +16,7 @@ apt-get update
 apt-get install -y python3-dev python3-pip postgresql-client
 
 
-# Install GDAL from source (Takes approx 1 hour)
+# Install GDAL from source (Takes approx 1.5 hours)
 apt-get install -y --no-install-recommends wget make g++ libtool-bin
 
 wget http://download.osgeo.org/geos/geos-${GEOS_VER}.tar.bz2 -O download.tar.bz2
@@ -52,6 +52,7 @@ make install
 cd ..
 rm -R gdal-$GDAL_VER
 
+ldconfig -v
 
 # Install Django
 pip3 install django==1.11.18 psycopg2-binary==2.7.5
