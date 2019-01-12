@@ -35,7 +35,25 @@ https://pcjericks.github.io/py-gdalogr-cookbook/
 
     A minimal Django 1.18 site to debug the scripts
     
-    
+## How to test GeoDjango enabled
+0. Prerequistics
+
+    Docker
+    Docker Compose (17.09.0 or higher)
+
+1. `cd /path/to/where/this/repo/cloned`
+2. `docker-compose up -d`
+3. `docker-compose exec ubuntu /bin/bash`
+4. `cd /myscripts`
+5. `./gdal-install-apt-ubuntu18.sh`
+6. `cd ./testsite`
+7. `python ./manage.py test`
+
+    If the installation went correctly, the unittest will finish successfully. Otherwise it will raise exception that GDAL is not installed. (`from django.contrib.gis.db import models` raises Exception when GeoDjango could not find GDAL and GEOS)
+
+## Notes
+Setting `GDAL_LIBRARY_PATH` and `GEOS_LIBRARY_PATH` to Django's config file would not be necessary for latest Django versions (confirmed in Django 1.11.18) but may be required for old versions.
+
 
 Author: Go Sato, 2019
 
