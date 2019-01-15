@@ -34,11 +34,20 @@ The author is not one of the developers of GeoDjango, GDAL and other products an
     Shellscript for CentOS6 (and potentially Amazon Linux 1) by building GDAL from source
 
     Allows you to install GDAL in Python but not the latest version.
-5. docker-compose.yml
+5. gdal-build-alpine.sh
+
+    Shellscript for Alpine Linux 3.8 by building GDAL from source
+    
+    Currently the only way to enable GeoDjango in Alpine 3.8 and lower
+6. gdal-install-apk-alpine.sh
+
+    Shellscript for Alpine Linux edge (as of 15 Jan 2019) by installing GDAL with apk from testing repository
+
+    GDAL, GEOS and PROJ4 are all experimental version.
+7. docker-compose.yml
 
     docker-compose file for testing
-
-6. testsite (directory)
+8. testsite (directory)
 
     A minimal Django 1.18 site to debug the scripts
     

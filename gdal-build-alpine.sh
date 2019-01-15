@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Written 14 Jan 2019
-# Tested on Alpine 3.8
+# Tested with Alpine 3.8
 
 GEOS_VER=3.7.1
 PROJ_VER=5.2.0

@@ -10,12 +10,24 @@ services:
   ubuntu:
     image: ubuntu:bionic
     entrypoint: tail -f /dev/null
+    depends_on: 
+      - postgis
     volumes:
       - .:/myscripts
 
   centos6:
     image: centos:6.10
     entrypoint: tail -f /dev/null
+    depends_on: 
+      - postgis
     volumes:
       - .:/myscripts
 
+  alpine:
+    image: alpine:edge
+    entrypoint: tail -f /dev/null
+    depends_on: 
+      - postgis
+    volumes:
+      - .:/myscripts
+    
