@@ -1,29 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 
-# Written 6 Jan 2019
-# Tested on CentOS 6.10
+# Written 14 Jan 2019
+# Tested on Alpine 3.8
+
+GEOS_VER=3.7.1
+PROJ_VER=5.2.0
+GDAL_VER=2.4.0
 
 
-GEOS_VER=3.6.3   # 3.7.0+ can't be built straight away in CentOS6 due to c++11 requirement
-PROJ_VER=5.1.0   # 5.2.0+ can't be built straight away in CentOS6 due to c++11 requirement
-GDAL_VER=2.2.4   # 2.3.0+ can't be built straight away in CentOS6 due to c++11 requirement
-
-
-yum update
-
-# Install EPEL
-yum -y install wget
 cd /tmp
-wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-rpm -Uvh epel-release-*.rpm
 
-# Install Python 3
-yum -y install python34-devel python34-setuptools postgresql
-python3 /usr/lib/python3.4/site-packages/easy_install.py pip
+# Install Python 3 and postgresql-client
+apk add --no-cache python3 py3-setuptools postgresql-libs libstdc++
 
-
-# Install GDAL from source (Takes approx 30mins)
-yum -y install gcc make gcc-c++ libtool libxml2-devel libpng libtiff
+# Install GDAL from source (Takes approx 1.5 hours)
+apk add --no-cache --virtual .build-deps g++ make linux-headers python3-dev postgresql-dev
 
 wget http://download.osgeo.org/geos/geos-${GEOS_VER}.tar.bz2 -O download.tar.bz2
 tar xjf download.tar.bz2
@@ -36,7 +27,6 @@ make install
 cd ..
 rm -R geos-$GEOS_VER
 
-
 wget http://download.osgeo.org/proj/proj-${PROJ_VER}.tar.gz -O download.tar.gz
 tar -xzf download.tar.gz
 rm download.tar.gz
@@ -47,7 +37,6 @@ make
 make install
 cd ..
 rm -R proj-$PROJ_VER
-
 
 wget http://download.osgeo.org/gdal/${GDAL_VER}/gdal-${GDAL_VER}.tar.gz -O download.tar.gz
 tar -xzf download.tar.gz
@@ -60,14 +49,13 @@ make install
 cd ..
 rm -R gdal-$GDAL_VER
 
-echo "/usr/local/lib" >> /etc/ld.so.conf.d/usrlocalbin.conf
-ldconfig -v
-
-
-# Install Django with Psycopg2
+# Install Django
+pip3 install --upgrade pip
 pip3 install django==1.11.18 psycopg2-binary==2.7.5
 
 
 # (Optional) Install GDAL-python binding. Not needed to make GeoDjango work
 pip3 install GDAL==$GDAL_VER
+
+apk --purge del .build-deps
 

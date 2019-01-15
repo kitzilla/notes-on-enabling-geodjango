@@ -59,4 +59,4 @@ pip3 install django==1.11.18 psycopg2-binary==2.7.5
 
 
 # (Optional) Install GDAL-python binding. Not needed to make GeoDjango work
-pip3 install GDAL==$GDAL_VER --global-option=build_ext --global-option="-I/usr/include/gdal"
+pip3 install GDAL==$GDAL_VER

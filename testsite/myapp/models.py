@@ -5,3 +5,7 @@ from django.contrib.postgres.fields import JSONField
 class MyGeoModel(models.Model):
     geom = models.GeometryField(srid=3857, spatial_index=True)
     data = JSONField()
+
+class MyGeoModel2(models.Model):
+    geom = models.GeometryField(srid=3857, spatial_index=True)
+    txt = models.TextField()
